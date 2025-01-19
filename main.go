@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/zcalusic/sysinfo"
 	"os"
 	"os/exec"
 	"runtime"
 	"strings"
+
+	"github.com/zcalusic/sysinfo"
 )
 
 var Reset = "\033[0m"
@@ -44,8 +45,8 @@ func printHeader() {
 ██╔═══╗ ██╔════╝ ╚══██╔══╝ ██╔════╝ ██║  ██║ ██║  ██║
 ██████║ ██████╗     ██║    ██║      ███████║ ███████║
 ██╔═══╝ ██╔══╝      ██║    ██║      ██╔══██║    ██║
-██║     ███████╗    ██║    ███████╗ ██║  ██║     ██║
-╚═╝     ╚══════╝    ╚═╝    ╚══════╝ ╚═╝  ╚═╝      ██║
+██║     ███████╗    ██║    ███████╗ ██║  ██║    ██║
+╚═╝     ╚══════╝    ╚═╝    ╚══════╝ ╚═╝  ╚═╝    ╚═╝
 ` + Reset)
 	fmt.Println(Yellow + "             A Lightweight System Info Tool\n" + Reset)
 }
