@@ -29,7 +29,7 @@ Product:     20U4S4T000 (LENOVO)
 
 Terminal:    /bin/zsh
 Kernel:      6.1.0-28-amd64
-RAM:         15Gi total, 3.9Gi used
+RAM:         15Gi total, 5.5Gi used
 GPU:         00:02.0 VGA compatible controller: Intel Corporation CometLake-U GT2 [UHD Graphics] (rev 02)
 
 Storage Info:
@@ -57,5 +57,5 @@ go mod tidy
 ```
 4. Build and run:
 ```shell
-go run .
+make run
 ```

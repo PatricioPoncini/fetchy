@@ -6,8 +6,6 @@ import (
 	"os/exec"
 	"runtime"
 	"strings"
-
-	"github.com/zcalusic/sysinfo"
 )
 
 var Reset = "\033[0m"
@@ -16,18 +14,17 @@ var Yellow = "\033[33m"
 var Magenta = "\033[35m"
 var Cyan = "\033[36m"
 
+// TODO: Errors with Red println()
+
 func main() {
 	printHeader()
 
-	var si sysinfo.SysInfo
-	si.GetSysInfo()
-
 	fmt.Println(Cyan + "System Information:" + Reset)
-	println(Green + "OS name:     " + Reset + si.OS.Name)
-	println(Green + "OS version:  " + Reset + si.OS.Version)
+	getOSName()
+	getOSVersion()
 	println(Green + "Arch:        " + Reset + runtime.GOARCH)
-	println(Green + "CPU:         " + Reset + si.CPU.Model)
-	println(Green + "Product:     " + Reset + si.Product.Name + " (" + si.Product.Vendor + ")")
+	getCPU()
+	getProduct()
 
 	fmt.Println()
 	getCurrentTerminal()
@@ -49,6 +46,92 @@ func printHeader() {
                           /____/   
 ` + Reset)
 	fmt.Println(Yellow + "A Lightweight System Info Tool\n" + Reset)
+}
+
+func getOSName() {
+	out, err := exec.Command("lsb_release", "-a", "Description").Output()
+	if err != nil {
+		fmt.Println("Error executing lsblk:", err)
+		return
+	}
+
+	output := string(out)
+
+	for _, line := range strings.Split(output, "\n") {
+		if strings.HasPrefix(line, "Description:") {
+			description := strings.TrimSpace(strings.Split(line, ":")[1])
+			println(Green + "OS name:     " + Reset + description)
+			return
+		}
+	}
+
+	fmt.Println("OS distro name not found")
+}
+
+func getCPU() {
+	out, err := exec.Command("lscpu").Output()
+	if err != nil {
+		fmt.Println("Error executing lscpu:", err)
+		return
+	}
+
+	output := string(out)
+
+	for _, line := range strings.Split(output, "\n") {
+		if strings.HasPrefix(line, "Model name:") {
+			cpuModel := strings.TrimSpace(strings.Split(line, ":")[1])
+			println(Green + "CPU:         " + Reset + cpuModel)
+			return
+		}
+	}
+
+	fmt.Println("CPU Model not found")
+}
+
+func getOSVersion() {
+	out, err := exec.Command("lsb_release", "-a", "Description").Output()
+	if err != nil {
+		fmt.Println("Error executing lsblk:", err)
+		return
+	}
+
+	output := string(out)
+
+	for _, line := range strings.Split(output, "\n") {
+		if strings.HasPrefix(line, "Release:") {
+			release := strings.TrimSpace(strings.Split(line, ":")[1])
+			println(Green + "OS version:  " + Reset + release)
+			return
+		}
+	}
+
+	fmt.Println("OS distro name not found")
+}
+
+func getProduct() {
+	productPath := "/sys/class/dmi/id/product_name"
+	vendorPath := "/sys/class/dmi/id/board_vendor"
+
+	product, err := os.ReadFile(productPath)
+	if err != nil {
+		fmt.Printf("Error reading product information: %v\n", err)
+		return
+	}
+
+	vendor, err := os.ReadFile(vendorPath)
+	if err != nil {
+		fmt.Printf("Error reading vendor information: %v\n", err)
+		return
+	}
+
+	productName := strings.TrimSpace(string(product))
+	vendorName := strings.TrimSpace(string(vendor))
+
+	if productName != "" && vendorName != "" {
+		println(Green + "Product:     " + Reset + productName + " (" + vendorName + ")")
+	} else {
+		fmt.Println("Product information not found")
+	}
 }
 
 func getStorage() {
