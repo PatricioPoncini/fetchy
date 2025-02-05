@@ -21,6 +21,8 @@
 A Lightweight System Info Tool
 
 System Information:
+User:        gawain
+Hostname:    kitt
 OS name:     Debian GNU/Linux 12 (bookworm)
 OS version:  12
 Arch:        amd64

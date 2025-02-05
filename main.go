@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"os/user"
 	"runtime"
 	"strings"
 )
@@ -20,6 +21,8 @@ func main() {
 	printHeader()
 
 	fmt.Println(Cyan + "System Information:" + Reset)
+	getUser()
+	getHostname()
 	getOSName()
 	getOSVersion()
 	println(Green + "Arch:        " + Reset + runtime.GOARCH)
@@ -197,4 +200,21 @@ func getGPU() {
 		}
 	}
 	println(Green + "GPU:         " + Reset + "No GPU detected")
+}
+
+func getUser() {
+	currentUser, err := user.Current()
+	if err != nil {
+		fmt.Printf("Unable to get current user: %s\n", err)
+	}
+
+	println(Green + "User:        " + Reset + currentUser.Username)
+}
+
+func getHostname() {
+	hostname, err := os.Hostname()
+	if err != nil {
+		fmt.Printf("Unable to get hostname: %s\n", err)
+	}
+	println(Green + "Hostname:    " + Reset + hostname)
 }
