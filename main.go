@@ -49,23 +49,15 @@ func printHeader() {
 }
 
 func getOSName() {
-	out, err := exec.Command("lsb_release", "-a", "Description").Output()
+	out, err := exec.Command("lsb_release", "-d").Output()
 	if err != nil {
-		fmt.Println("Error executing lsblk:", err)
+		fmt.Println("Error executing lsb_release:", err)
 		return
 	}
 
 	output := string(out)
-
-	for _, line := range strings.Split(output, "\n") {
-		if strings.HasPrefix(line, "Description:") {
-			description := strings.TrimSpace(strings.Split(line, ":")[1])
-			println(Green + "OS name:     " + Reset + description)
-			return
-		}
-	}
-
-	fmt.Println("OS distro name not found")
+	description := strings.TrimSpace(strings.TrimPrefix(output, "Description:"))
+	println(Green + "OS name:     " + Reset + description)
 }
 
 func getCPU() {
@@ -89,23 +81,15 @@ func getCPU() {
 }
 
 func getOSVersion() {
-	out, err := exec.Command("lsb_release", "-a", "Description").Output()
+	out, err := exec.Command("lsb_release", "-r").Output()
 	if err != nil {
-		fmt.Println("Error executing lsblk:", err)
+		fmt.Println("Error executing lsb_release:", err)
 		return
 	}
 
 	output := string(out)
-
-	for _, line := range strings.Split(output, "\n") {
-		if strings.HasPrefix(line, "Release:") {
-			release := strings.TrimSpace(strings.Split(line, ":")[1])
-			println(Green + "OS version:  " + Reset + release)
-			return
-		}
-	}
-
-	fmt.Println("OS distro name not found")
+	version := strings.TrimSpace(strings.TrimPrefix(output, "Release:"))
+	println(Green + "OS version:  " + Reset + version)
 }
 
 func getProduct() {

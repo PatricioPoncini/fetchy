@@ -1,15 +1,15 @@
-# `Fetchy`
+# Fetchy 🐀
 
 **Fetchy** is a lightweight system information tool written in Go. It provides detailed information about your system's hardware and software in a clean and colorful terminal output. Perfect for tech enthusiasts who want to quickly fetch system details.
 
-## `Features`
+## Features 🛠️
 
 - **System Information**: Operating System, version, architecture, and product details.
 - **Hardware Details**: CPU, GPU, memory, and storage information.
 - **Terminal and Kernel**: Displays the current terminal and kernel version.
 - **Simple and Lightweight**: Minimal dependencies, fast, and easy to use.
 
-## `Demo`
+## Demo ▶️
 ```shell
     ______     __       __         
    / ____/__  / /______/ /_  __  __
@@ -39,10 +39,10 @@ KINGSTON                       465.8G
 ---------------------------------------------
 ```
 
-## `Requirements`
+## Requirements ⚙️
 - **Go**: Version 1.19 or higher
 
-## `Installation`
+## Installation 💻
 1. Clone the repository:
 ```shell
 git clone https://github.com/PatricioPoncini/fetchy.git
