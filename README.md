@@ -11,33 +11,34 @@
 
 ## Demo ▶️
 ```shell
-    ______     __       __         
-   / ____/__  / /______/ /_  __  __
-  / /_  / _ \/ __/ ___/ __ \/ / / /
- / __/ /  __/ /_/ /__/ / / / /_/ / 
-/_/    \___/\__/\___/_/ /_/\__, /  
-                          /____/   
-
+    ______     __       __                                                                                                                                                                                                          
+   / ____/__  / /______/ /_  __  __                                                                                                                                                                                                 
+  / /_  / _ \/ __/ ___/ __ \/ / / /                                                                                                                                                                                                 
+ / __/ /  __/ /_/ /__/ / / / /_/ /                                                                                                                                                                                                  
+/_/    \___/\__/\___/_/ /_/\__, /                                                                                                                                                                                                   
+                          /____/                                                                                                                                                                                                    
+                                                                                                                                                                                                                                    
 A Lightweight System Info Tool
-
+                                                                                                                                                                                                                                    
 System Information:
 User:        gawain
 Hostname:    kitt
-OS name:     Debian GNU/Linux 12 (bookworm)
-OS version:  12
+OS name:     Ubuntu 22.04.5 LTS
+OS version:  22.04
 Arch:        amd64
-CPU:         Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
-Product:     20U4S4T000 (LENOVO)
+CPU:         12th Gen Intel(R) Core(TM) i5-12400F
+Product:     System Product Name (ASUSTeK COMPUTER INC.)
 
-Terminal:    /bin/zsh
-Kernel:      6.1.0-28-amd64
-RAM:         15Gi total, 5.5Gi used
-GPU:         00:02.0 VGA compatible controller: Intel Corporation CometLake-U GT2 [UHD Graphics] (rev 02)
+Terminal:    /usr/bin/zsh
+Kernel:      6.8.0-48-generic
+RAM:         6.72GB / 15.43GB [█████████████░░░░░░░░░░░░░░░░░] 44%
+GPU:         01:00.0 VGA compatible controller: NVIDIA Corporation GM206 [GeForce GTX 950] (rev a1)
 
-Storage Info:
+Storage Info:                                                                                                                                                                                                                       
 Model                     Size (GB)       
 ---------------------------------------------
-KINGSTON                       465.8G              
+KINGSTON                       894,3G              
+WD                             931,5G              
 ---------------------------------------------
 ```
 
