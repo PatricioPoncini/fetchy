@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"os/user"
 	"runtime"
+	"strconv"
 	"strings"
 )
 
@@ -170,19 +171,49 @@ func getKernel() {
 }
 
 func getMemory() {
-	out, err := exec.Command("free", "-h").Output()
+	out, err := exec.Command("free", "-m").Output()
 	if err != nil {
 		fmt.Println("Error getting memory info:", err)
 		return
 	}
 
 	lines := strings.Split(string(out), "\n")
-	if len(lines) > 1 {
-		mem := strings.Fields(lines[1])
-		if len(mem) >= 3 {
-			println(Green + "RAM:         " + Reset + mem[1] + " total, " + mem[2] + " used")
-		}
+	if len(lines) <= 1 {
+		return
 	}
+
+	mem := strings.Fields(lines[1])
+	if len(mem) < 3 {
+		return
+	}
+
+	totalStr := mem[1]
+	usedStr := mem[2]
+
+	totalMB, _ := strconv.Atoi(totalStr)
+	usedMB, _ := strconv.Atoi(usedStr)
+
+	totalGB := float64(totalMB) / 1024.0
+	usedGB := float64(usedMB) / 1024.0
+
+	percent := float64(usedMB) / float64(totalMB)
+	bar := renderBar(percent, 30)
+
+	fmt.Printf("%sRAM:%s         %.2fGB / %.2fGB %s %.0f%%\n",
+		Green, Reset, usedGB, totalGB, bar, percent*100)
+}
+
+func renderBar(percent float64, width int) string {
+	filled := int(percent * float64(width))
+	if filled > width {
+		filled = width
+	}
+	if filled < 0 {
+		filled = 0
+	}
+
+	bar := strings.Repeat("█", filled) + strings.Repeat("░", width-filled)
+	return fmt.Sprintf("[%s]", bar)
 }
 
 func getGPU() {
